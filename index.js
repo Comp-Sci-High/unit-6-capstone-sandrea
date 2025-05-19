@@ -36,13 +36,13 @@ app.get("/", async (req, res) => {
 
 
 app.patch("/user/:name", async (req,res) =>{
-    const res = await Assignment.findOneAndUpdate({name: req.params.name}, {req:body}, {new:true})
-    res.render("assignments.ejs", res)
+    const data = await Assignment.findOneAndUpdate({name: req.params.name}, {req:body}, {new:true})
+    res.render("assignments.ejs", data)
 
 
 app.delete("/user/:name", async (req,res) =>{
-    const res = await Assignment.findOneAndDelete({name: req.params.name})
-    res.render("assignments.ejs", res)
+    const data = await Assignment.findOneAndDelete({name: req.params.name})
+    res.render("assignments.ejs", data)
 })
 
 
@@ -72,8 +72,6 @@ async function startServer() {
 }
 
 startServer();
-
-
 
 
 
