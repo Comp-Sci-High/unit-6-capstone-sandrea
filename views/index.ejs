@@ -12,32 +12,18 @@
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="index.ejs">Assignment Tracker</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.ejs">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="assignments.ejs">Assingments</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
   </div>
 </nav>
@@ -51,7 +37,9 @@
 <input type="text" name="name" required/>
 <button type="submit">Submit</button>
 
-  </form>  
+  </form> 
+  
+  
     <div class="progress-bar">
       <div class="progress"></div>
     </div>
@@ -60,29 +48,19 @@
 
   <!-- Assignment Cards -->
   <div class="assignments">
-
+<% for(let i=0; i<assignments.length; i++) { %>
     <div class="card">
-      <h3>Math Homework</h3>
-      <p>Due: May 20, 2025</p>
-      <p>Description: Complete chapters 5–7 exercises</p>
-      <span class="status urgent">Urgent</span>
+      <h3><%= assignments[i].name %></h3>
+      <p><%= assignments[i].description %></p>
+      <p><%= assignments[i].status %></p>
+ 
+      <span class="status"><%= assignments[i].status %></span>
     </div>
-
-    <div class="card">
-      <h3>History Essay</h3>
-      <p>Due: May 25, 2025</p>
-      <p>Description: Write a 1500-word essay on WWI</p>
-      <span class="status normal">Normal</span>
-    </div>
-
-    <div class="card">
-      <h3>Biology Lab</h3>
-      <p>Completed</p>
-      <p>Description: Submit lab report on plant cells</p>
-      <span class="status completed">Completed</span>
-    </div>
-
+<%}%>
   </div>
+
+
+
 
 </div>
 

@@ -20,25 +20,45 @@ const assignmentSchema = new mongoose.Schema(
          name: { type: String, required: true },
          description: { type: String },
          grade: { type: Number, default: 0 },
-         completionStatus: { type: Boolean, default: false }
+         status: { type: String, default: false },
+         dueDate: { type: String, required:true}
     }
 );
 
 const Assignment = mongoose.model("Assignment", assignmentSchema, "Assignments");
 
-let assignmentList = [""]
-
 
 app.get("/", async (req, res) => {
     const assignments = await Assignment.find({});
-    res.render("index.ejs", assignments);
+    res.render("index.ejs", {assignments});
+    // res.json(assignments)
 });
 
+
+app.get("/assignments", async (req, res) => {
+    const assignments = await Assignment.find({});
+    res.render("assignments.ejs", assignments);
+});
+//app.post("/assingments", async (req, res)=>{
+//     const data = []
+//     res.generate(data, "assignments.ejs")
+// })
+
+app.post("/assignments", async (req, res) => {
+  const newAssignment = await new Assignment({
+    name: req.body.name,
+    description: req.body.description,
+    grade: req.body.grade,
+    status: req.body.status,
+    dueDate: req.body.dueDate
+  }).save();
+  res.json(newAssignment);
+});
 
 app.patch("/user/:name", async (req,res) =>{
     const data = await Assignment.findOneAndUpdate({name: req.params.name}, {req:body}, {new:true})
     res.render("assignments.ejs", data)
-
+})
 
 app.delete("/user/:name", async (req,res) =>{
     const data = await Assignment.findOneAndDelete({name: req.params.name})
@@ -72,9 +92,3 @@ async function startServer() {
 }
 
 startServer();
-
-
-
-
-
-
